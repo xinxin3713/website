@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block bodycontent %}
+
+		<!-- Hero-area -->
+		<div class="hero-area section">
+
+			<!-- Backgound Image -->
+			<div class="bg-image bg-parallax overlay" style="background-image:url(/static/web/img/page-background.jpg)"></div>
+			<!-- /Backgound Image -->
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 text-center">
+						<ul class="hero-area-tree">
+							<li><a href="/">首页</a></li>
+							<li>课程</li>
+						</ul>
+						<h1 class="white-text">Python课程体系</h1>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /Hero-area -->
+
+		<!-- Blog -->
+		<div id="blog" class="section">
+
+			<!-- container -->
+			<div class="container">
+
+				<!-- row -->
+				<div class="row">
+
+					<!-- main blog -->
+					<div id="main" class="col-md-9">
+
+						<!-- row -->
+						<div class="row">
+							{% for course in object_list %}
+							<!-- single blog -->
+							<div class="col-md-6">
+								<div class="single-blog">
+									<div class="blog-img">
+										<a href="/course/{{course.id}}/">
+											<img src="{{course.cover.url}}" alt="">
+										</a>
+									</div>
+									<h4><a href="/course/{{course.id}}/">{{ course.title }}</a></h4>
+									<div class="blog-meta">
+										<span class="blog-meta-author">老师: <a href="#">{{course.user}}</a></span>
+										<div class="pull-right">
+											<span>{{course.price}}元</span>
+											<span class="blog-meta-comments">{{course.get_level_display}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /single blog -->
+							{% endfor %}
+
+						</div>
+						<!-- /row -->
+
+						<!-- row
+						<div class="row">
+
+							<div class="col-md-12">
+								<div class="post-pagination">
+									<a href="#" class="pagination-back pull-left">Back</a>
+									<ul class="pages">
+										<li class="active">1</li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+									</ul>
+									<a href="#" class="pagination-next pull-right">Next</a>
+								</div>
+							</div>
+
+						</div>
+						-- /row -->
+					</div>
+					<!-- /main blog -->
+
+					<!-- aside blog -->
+					<div id="aside" class="col-md-3">
+
+						<!-- search widget -->
+						<div class="widget search-widget">
+							<form action="/course/">
+								<input class="input" type="text" name="search">
+								<button><i class="fa fa-search"></i></button>
+							</form>
+						</div>
+						<!-- /search widget -->
+
+						<!-- category widget -->
+						<div class="widget category-widget">
+							<h3>课程类目</h3>
+							{% for category in categories %}
+							<a class="category" href="/course/?category_id={{category.id}}">{{ category.name}} <span> {{category.course_set.count}} </span></a>
+							{% endfor %}
+						</div>
+						<!-- /category widget -->
+
+					</div>
+					<!-- /aside blog -->
+
+				</div>
+				<!-- row -->
+
+			</div>
+			<!-- container -->
+
+		</div>
+		<!-- /Blog -->
+
+{% endblock %}

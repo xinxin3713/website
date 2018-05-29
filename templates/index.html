@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+
+<header id="header" class="transparent-nav">
+	<div class="container">
+
+		<div class="navbar-header">
+			<!-- Logo -->
+			{% block logo %}
+			<div class="navbar-brand">
+				<a class="logo" href="index.html">
+					<img src="{% static 'web/img/PYE-logo.png' %}" alt="logo">
+				</a>
+			</div>
+			{% endblock %}
+			<!-- /Logo -->
+
+			<!-- Mobile toggle -->
+			<button class="navbar-toggle">
+				<span></span>
+			</button>
+			<!-- /Mobile toggle -->
+		</div>
+
+		<!-- Navigation -->
+		<nav id="nav">
+			<ul class="main-menu nav navbar-nav navbar-right">
+				<li><a href="/">首页</a></li>
+				<li><a href="/course/">课程介绍</a></li>
+				<li><a href="#">关于派派</a></li>
+				<li><a href="/contact/">联系我们</a></li>
+			</ul>
+		</nav>
+		<!-- /Navigation -->
+
+	</div>
+</header>
+
+{% endblock %}
+
+{% block bodycontent %}
+<!-- Home -->
+<div id="home" class="hero-area">
+
+	<!-- Backgound Image -->
+	<div class="bg-image bg-parallax overlay" style="background-image:url(/static/web/img/home-background.jpg)"></div>
+	<!-- /Backgound Image -->
+
+	<div class="home-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<h1 class="white-text">用最聪明的方式学习Python人工智能技术</h1>
+					<p class="lead white-text">Python基础 &#8608 Python编程范式 &#8608 文件与数据库 &#8608 Web服务开发 &#8609 </p>
+					<p class="lead white-text">云计算平台 &#8669 Python数据科学 &#8669 Python机器学习 &#8669 Python深度学习</p>
+					<a class="main-button icon-button" href="#courses">开始课程</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- /Home -->
+
+<!-- Courses -->
+<div id="courses" class="section">
+
+	<!-- container -->
+	<div class="container">
+
+		<!-- row -->
+		<div class="row">
+			<div class="section-header text-center">
+				<h2>发现课程</h2>
+				<p class="lead">内容、视频、实践空间、在线互动，一站式教学服务。</p>
+			</div>
+		</div>
+		<!-- /row -->
+
+		<!-- courses -->
+		<div id="courses-wrapper">
+			<div class="row">
+				{% for course in object_list %}
+				<div class="col-md-4">
+					<div class="course">
+						<a href="/course/{{course.id}}/" class="course-img">
+							<img src="{{course.cover.url}}" alt="{{course.title}}">
+							<i class="course-link-icon fa fa-link"></i>
+						</a>
+						<a class="course-title" href="/course/{{course.id}}/">{{course.title}}</a>
+						<div class="course-details">
+							<span class="course-category">{{course.get_level_display}}</span>
+							{% if course.price > 0 %}
+							<span class="course-price course-premium">{{ course.price }}元</span>
+							{% else %}
+							<span class="course-price course-free">免费</span>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+
+			</div>
+			<!-- /row -->
+
+		</div>
+
+		<div class="row">
+			<div class="center-btn">
+				<a class="main-button icon-button" href="/course/">更多课程</a>
+			</div>
+		</div>
+
+	</div>
+	<!-- container -->
+
+</div>
+<!-- /Courses -->
+
+<!-- Call To Action -->
+<div id="cta" class="section">
+
+	<!-- Backgound Image -->
+	<div class="bg-image bg-parallax overlay" style="background-image:url(/static/web/img/cta1-background.jpg)"></div>
+	<!-- /Backgound Image -->
+
+	<!-- container -->
+	<div class="container">
+
+		<!-- row -->
+		<div class="row">
+
+			<div class="col-md-6">
+				<h2 class="white-text">最好的学习方式</h2>
+				<p class="lead white-text">当你快速应用你学到的东西时，你学得最好。</p>
+				<p class="lead white-text">我们将课程设计为Python的notebook、专家视频与即时在线项目练习相结合，在每个课程中都建立了即时和个性化的反馈练习模式。这套模式将为您提供一套内容、视频、在线实践与反馈练习相结合的学与用快速结合的方式，提供你学习、应用与掌握的速度。
+				<p class="lead white-text">我们基于现实的编程学习问题开发了派派学院！</p>
+				<a class="main-button icon-button" href="#why-us">关于派派</a>
+			</div>
+
+		</div>
+		<!-- /row -->
+
+	</div>
+	<!-- /container -->
+
+</div>
+<!-- /Call To Action -->
+
+<!-- Why us -->
+<div id="why-us" class="section">
+
+	<!-- container -->
+	<div class="container">
+
+		<!-- row -->
+		<div class="row">
+			<div class="section-header text-center">
+				<h2>为什么选择派派学院</h2>
+				<p class="lead">内容、视频、在线实践与反馈练习相结合。</p>
+			</div>
+
+			<!-- feature -->
+			<div class="col-md-3">
+				<div class="feature">
+					<i class="feature-icon fa fa-flask"></i>
+					<div class="feature-content">
+						<h4>在线内容</h4>
+						<p>所有课程基于Python Notebook编写，集查看、运行与一体。在学习的同时修改尝试，将学与练结合在一起。</p>
+					</div>
+				</div>
+			</div>
+			<!-- /feature -->
+
+			<!-- feature -->
+			<div class="col-md-3">
+				<div class="feature">
+					<i class="feature-icon fa fa-users"></i>
+					<div class="feature-content">
+						<h4>专家讲师</h4>
+						<p>所有老师均在Python工程、数据分析、机器学习方向有多年实践，并且均出于名校硕博。在提供课程内容的同时，提炼出课纲和关键难题，用视频为大家做进一步演示解答。</p>
+					</div>
+				</div>
+			</div>
+			<!-- /feature -->
+
+			<!-- feature -->
+			<div class="col-md-3">
+				<div class="feature">
+					<i class="feature-icon fa fa-cogs"></i>
+					<div class="feature-content">
+						<h4>实践空间</h4>
+						<p>为每位学员生成在线实践空间，利用Python的Notebook、在线IDE将所学内容在线直接实践。将学习与用快速结合在一起，更快掌握重点。</p>
+					</div>
+				</div>
+			</div>
+			<!-- /feature -->
+
+			<!-- feature -->
+			<div class="col-md-3">
+				<div class="feature">
+					<i class="feature-icon fa fa-comments"></i>
+					<div class="feature-content">
+						<h4>交流社区</h4>
+						<p>每部分课程有相关的笔记和问答区，每期学员有统一的QQ/微信群，条件允许情况下组建线下学习环境。提供线上和线下互动式的学习环境，让学习成为快乐。</p>
+					</div>
+				</div>
+			</div>
+			<!-- /feature -->
+
+		</div>
+		<!-- /row -->
+
+		<hr class="section-hr">
+
+		<!-- row -->
+		<div class="row">
+
+			<div class="col-md-6">
+				<h3>在派派学习关于Python的一切</h3>
+				<p class="lead">Python所代表的数据科学分析能力和编程能力正成为年轻人乃至整个世界最看好的热门或者说必备技能。</p>
+				<p>将Python用于：</br>
+				Web开发：Django，Flask，Tornado，web2py </br>
+				GUI开发：tkInter，PyGObject，PyQt，PySide，Kivy，wxPython</br>
+				数据科学：SciPy，Pandas，IPython</br>
+				机器学习：Sk-learn，Xgboost，Tensorflow，Keras </br>
+				软件开发：Buildbot，Trac，Roundup</br>
+				系统管理：Ansible，Salt，OpenStack</p>
+			</div>
+
+			<div class="col-md-5 col-md-offset-1">
+				<a class="about-video" href="#">
+					<img src="{% static 'web/img/about-video.jpg' %}" alt="">
+					<i class="play-icon fa fa-play"></i>
+				</a>
+			</div>
+
+		</div>
+		<!-- /row -->
+
+	</div>
+	<!-- /container -->
+
+</div>
+<!-- /Why us -->
+
+<!-- Contact CTA -->
+<div id="contact-cta" class="section">
+
+	<!-- Backgound Image -->
+	<div class="bg-image bg-parallax overlay" style="background-image:url(./img/cta2-background.jpg)"></div>
+	<!-- Backgound Image -->
+
+	<!-- container -->
+	<div class="container">
+
+		<!-- row -->
+		<div class="row">
+
+			<div class="col-md-8 col-md-offset-2 text-center">
+				<h2 class="white-text">准备好学习了吗？</h2>
+				<p class="lead white-text">派派学院用来帮助各种人才学习Python技术栈知识。无论您是刚入门培养职业能力，还是希望进阶技能更新；或者是团队需要员工培训，希望将派派学院的教程与您的课程整合在一起。派派学院都可以提供帮助。</p>
+				<a class="main-button icon-button" href="#">联系我们</a>
+			</div>
+
+		</div>
+		<!-- /row -->
+
+	</div>
+	<!-- /container -->
+
+</div>
+<!-- /Contact CTA -->
+{% endblock %}
